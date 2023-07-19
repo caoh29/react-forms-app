@@ -41,7 +41,7 @@ export default function UserForm() {
         isEmployed: false,
         favoriteColor: '',
         sauces: [],
-        bestStooge: '',
+        bestStooge: 'larry',
         notes: '',
     }
 
