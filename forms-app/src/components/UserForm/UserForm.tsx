@@ -5,14 +5,15 @@ interface FormValues {
     firstName: string;
     lastName: string;
     age: number;
-    isEmployed: boolean;
+    employed: boolean;
     favoriteColor: string;
     sauces: string[];
-    bestStooge: string;
+    stooge: string;
     notes: string;
 }
 
 const COLORS = [
+    { name: '', value: '' },
     { name: 'Red', value: 'red' },
     { name: 'Blue', value: 'blue' },
     { name: 'Green', value: 'green' },
@@ -26,22 +27,29 @@ const SAUCES = [
     { name: 'Guacamole', value: 'guacamole' },
 ];
 
-const BEST_STOOGE = [
+const STOOGE = [
     { name: 'Larry', value: 'larry' },
     { name: 'Curly', value: 'curly' },
     { name: 'Moe', value: 'moe' },
 ];
 
+const defaultTextAreaValue = {
+    stooge: "larry",
+    employed: false,
+};
+
 export default function UserForm() {
+
     // Defining inital data
     const initialValues: FormValues = {
         firstName: '',
         lastName: '',
+        // age: NaN // shows the placeholder but in console displays an error
         age: 0,
-        isEmployed: false,
+        employed: false,
         favoriteColor: '',
         sauces: [],
-        bestStooge: 'larry',
+        stooge: 'larry',
         notes: '',
     }
 
@@ -50,10 +58,10 @@ export default function UserForm() {
         firstName: Yup.string().required('First name is required'),
         lastName: Yup.string().required('Last name is required'),
         age: Yup.number().required('Valid age is required'),
-        isEmployed: Yup.boolean().required('Employment status is required'),
+        employed: Yup.boolean().required('Employment status is required'),
         favoriteColor: Yup.string().required('Favorite color is required'),
         sauces: Yup.array().required('Favorite sauces are required'),
-        bestStooge: Yup.string().required('Best stooge is required'),
+        stooge: Yup.string().required('Best stooge is required'),
         notes: Yup.string(),
     });
 
@@ -114,13 +122,13 @@ export default function UserForm() {
             </div>
 
             <div>
-                <label htmlFor="isEmployed">Employed</label>
+                <label htmlFor="employed">Employed</label>
                 <input
-                    id="isEmployed"
-                    name="isEmployed"
+                    id="employed"
+                    name="employed"
                     type="checkbox"
                     onChange={formik.handleChange}
-                    checked={formik.values.isEmployed}
+                    checked={formik.values.employed}
                 />
             </div>
 
@@ -162,19 +170,19 @@ export default function UserForm() {
             </div>
 
             <div>
-                {BEST_STOOGE.map((stooge) => (
+                {STOOGE.map((stooge) => (
                     <label key={stooge.value}>
                         <input
                             type="radio"
-                            name="bestStooge"
+                            name="stooge"
                             value={stooge.value}
-                            checked={formik.values.bestStooge === stooge.value}
+                            checked={formik.values.stooge === stooge.value}
                             onChange={formik.handleChange}
                         />
                         {stooge.name}
                     </label>
                 ))}
-                {formik.touched.bestStooge && formik.errors.bestStooge && <div>{formik.errors.bestStooge}</div>}
+                {formik.touched.stooge && formik.errors.stooge && <div>{formik.errors.stooge}</div>}
             </div>
 
             <div>
@@ -190,8 +198,13 @@ export default function UserForm() {
                 {formik.touched.notes && formik.errors.notes && <div>{formik.errors.notes}</div>}
             </div>
 
-            <button type="submit">Submit</button>
-            <button type="button" onClick={formik.handleReset}>Reset</button>
+            { formik.values === initialValues ? (<button disabled>Submit</button>) : (<button type="submit">Submit</button>) }
+            { formik.values === initialValues ? (<button type="button" disabled>Reset</button>) : (<button type="button" onClick={formik.handleReset}>Reset</button>) }
+
+            <div>
+                {/* <textarea rows={10} cols={50}>{JSON.stringify(formik.values, null, 2)}</textarea> */}
+                <textarea rows={10} cols={50} defaultValue={JSON.stringify(defaultTextAreaValue, null, 2)}></textarea>
+            </div>
         </form>
     );
 };
