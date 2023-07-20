@@ -64,7 +64,7 @@ export default function UserForm() {
         favoriteColor: Yup.string(),
         sauces: Yup.array(),
         stooge: Yup.string(),
-        notes: Yup.string().length(100),
+        notes: Yup.string().max(100, 'Notes must be less than or equal to 100 characters'),
     });
 
     // Handling form submit
