@@ -147,9 +147,6 @@ export default function UserForm() {
                 >
                     {COLORS.map((color) => <option key={color.value} value={color.value}>{color.name}</option>)}
                 </select>
-                {formik.touched.favoriteColor && formik.errors.favoriteColor && (
-                <div>{formik.errors.favoriteColor}</div>
-                )}
             </div>
 
             <div>
@@ -168,9 +165,6 @@ export default function UserForm() {
                         </label>
                     </div>
                 ))}
-                {formik.touched.sauces && formik.errors.sauces && (
-                <div>{formik.errors.sauces}</div>
-                )}
             </div>
 
             <div>
@@ -186,7 +180,6 @@ export default function UserForm() {
                         {stooge.name}
                     </label>
                 ))}
-                {formik.touched.stooge && formik.errors.stooge && <div>{formik.errors.stooge}</div>}
             </div>
 
             <div>
@@ -199,7 +192,6 @@ export default function UserForm() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-                {formik.touched.notes && formik.errors.notes && <div>{formik.errors.notes}</div>}
             </div>
 
             { formik.values === formik.initialValues ? (<button disabled>Submit</button>) : (<button type="submit">Submit</button>) }
@@ -211,14 +203,7 @@ export default function UserForm() {
                     JSON.stringify(defaultTextAreaValue, null, 2) :
                     JSON.stringify(formik.values, null, 2)
                 }  />
-                {/* <textarea rows={10} cols={50} readOnly value={
-                    for (const key in formik.values) {
-                        if (key !== formik.initialValues[key]) {
-                            return formik.values[key];
-                        }
-                    }
-                } /> */}
             </div>
         </form>
     );
-};
+}
