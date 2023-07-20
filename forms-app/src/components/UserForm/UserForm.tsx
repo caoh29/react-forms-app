@@ -54,20 +54,24 @@ export default function UserForm() {
     }
 
     // Validations
+    const regexPattern: RegExp = /^[A-Za-z ]+$/;
+
     const validationSchema = Yup.object().shape({
-        firstName: Yup.string().required('First name is required'),
-        lastName: Yup.string().required('Last name is required'),
-        age: Yup.number().required('Valid age is required'),
-        employed: Yup.boolean().required('Employment status is required'),
-        favoriteColor: Yup.string().required('Favorite color is required'),
-        sauces: Yup.array().required('Favorite sauces are required'),
-        stooge: Yup.string().required('Best stooge is required'),
-        notes: Yup.string(),
+        firstName: Yup.string().required('First name is required').matches(regexPattern),
+        lastName: Yup.string().required('Last name is required').matches(regexPattern),
+        age: Yup.number().required('Valid age is required').positive().integer(),
+        employed: Yup.boolean(),
+        favoriteColor: Yup.string(),
+        sauces: Yup.array(),
+        stooge: Yup.string(),
+        notes: Yup.string().length(100),
     });
 
     // Handling form submit
     const handleSubmit = (values: FormValues) => {
-        console.log(JSON.stringify(values, null, 2));
+        // I decided to modify firstName and lastName to be lowercase for more practical uses in the future ex: analytics, insert into DB 
+        const newValues: FormValues = { ...values, firstName: values.firstName.toLowerCase(), lastName: values.lastName.toLowerCase() };
+        alert(JSON.stringify(newValues, null, 2));
     };
 
     const formik = useFormik({
@@ -198,12 +202,22 @@ export default function UserForm() {
                 {formik.touched.notes && formik.errors.notes && <div>{formik.errors.notes}</div>}
             </div>
 
-            { formik.values === initialValues ? (<button disabled>Submit</button>) : (<button type="submit">Submit</button>) }
-            { formik.values === initialValues ? (<button type="button" disabled>Reset</button>) : (<button type="button" onClick={formik.handleReset}>Reset</button>) }
+            { formik.values === formik.initialValues ? (<button disabled>Submit</button>) : (<button type="submit">Submit</button>) }
+            { formik.values === formik.initialValues ? (<button type="button" disabled>Reset</button>) : (<button type="button" onClick={formik.handleReset}>Reset</button>) }
 
             <div>
-                {/* <textarea rows={10} cols={50}>{JSON.stringify(formik.values, null, 2)}</textarea> */}
-                <textarea rows={10} cols={50} defaultValue={JSON.stringify(defaultTextAreaValue, null, 2)}></textarea>
+                <textarea rows={10} cols={50} readOnly value={
+                    formik.values === formik.initialValues ?
+                    JSON.stringify(defaultTextAreaValue, null, 2) :
+                    JSON.stringify(formik.values, null, 2)
+                }  />
+                {/* <textarea rows={10} cols={50} readOnly value={
+                    for (const key in formik.values) {
+                        if (key !== formik.initialValues[key]) {
+                            return formik.values[key];
+                        }
+                    }
+                } /> */}
             </div>
         </form>
     );
