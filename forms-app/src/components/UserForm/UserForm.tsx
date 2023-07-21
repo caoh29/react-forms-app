@@ -1,6 +1,8 @@
 import { useFormik  } from "formik";
 import * as Yup from 'yup';
 
+import styles from './UserForm.module.css';
+
 interface FormValues {
     firstName: string;
     lastName: string;
@@ -68,7 +70,7 @@ export default function UserForm() {
     });
 
     // Handling form submit
-    const handleSubmit = (values: FormValues) => {
+    const handleSubmit: (values: FormValues) => void = (values) => {
         // I decided to modify firstName and lastName to be lowercase for more practical uses in the future ex: analytics, insert into DB 
         const newValues: FormValues = { ...values, firstName: values.firstName.toLowerCase(), lastName: values.lastName.toLowerCase() };
         alert(JSON.stringify(newValues, null, 2));
@@ -81,78 +83,75 @@ export default function UserForm() {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <div>
-                <label htmlFor="firstName">First Name</label>
-                <input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    placeholder="First Name"
-                    onChange={formik.handleChange}
-                    value={formik.values.firstName}
-                    onBlur={formik.handleBlur}
-                />
-                {formik.touched.firstName && formik.errors.firstName && <div>{formik.errors.firstName}</div>}
-            </div>
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
+            
+            {/* First Name */}
+            <label htmlFor="firstName">First Name</label>
+            <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                placeholder="First Name"
+                onChange={formik.handleChange}
+                value={formik.values.firstName}
+                onBlur={formik.handleBlur}
+            />
+            {formik.touched.firstName && formik.errors.firstName && <div>{formik.errors.firstName}</div>}
 
-            <div>
-                <label htmlFor="lastName">Last Name</label>
-                <input
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    placeholder="Last Name"
-                    onChange={formik.handleChange}
-                    value={formik.values.lastName}
-                    onBlur={formik.handleBlur}
-                />
-                {formik.touched.lastName && formik.errors.lastName && <div>{formik.errors.lastName}</div>}
-            </div>
+            {/* Last Name */}
+            <label htmlFor="lastName">Last Name</label>
+            <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Last Name"
+                onChange={formik.handleChange}
+                value={formik.values.lastName}
+                onBlur={formik.handleBlur}
+            />
+            {formik.touched.lastName && formik.errors.lastName && <div>{formik.errors.lastName}</div>}
 
-            <div>
-                <label htmlFor="age">Age</label>
-                <input
-                    id="age"
-                    name="age"
-                    type="number"
-                    min={0}
-                    max={120}
-                    placeholder="Age"
-                    onChange={formik.handleChange}
-                    value={formik.values.age}
-                />
-                {formik.touched.age && formik.errors.age && <div>{formik.errors.age}</div>}
-            </div>
+            {/* Age */}
+            <label htmlFor="age">Age</label>
+            <input
+                id="age"
+                name="age"
+                type="number"
+                min={0}
+                max={120}
+                placeholder="Age"
+                onChange={formik.handleChange}
+                value={formik.values.age}
+            />
+            {formik.touched.age && formik.errors.age && <div>{formik.errors.age}</div>}
 
-            <div>
-                <label htmlFor="employed">Employed</label>
-                <input
-                    id="employed"
-                    name="employed"
-                    type="checkbox"
-                    onChange={formik.handleChange}
-                    checked={formik.values.employed}
-                />
-            </div>
+            {/* Employed */}
+            <label htmlFor="employed">Employed</label>
+            <input
+                id="employed"
+                name="employed"
+                type="checkbox"
+                onChange={formik.handleChange}
+                checked={formik.values.employed}
+            />
 
-            <div>
-                <label htmlFor="favoriteColor">Favorite Color</label>
-                <select
-                    id="favoriteColor"
-                    name="favoriteColor"
-                    value={formik.values.favoriteColor}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                >
-                    {COLORS.map((color) => <option key={color.value} value={color.value}>{color.name}</option>)}
-                </select>
-            </div>
+            {/* Favorite Color */}
+            <label htmlFor="favoriteColor">Favorite Color</label>
+            <select
+                id="favoriteColor"
+                name="favoriteColor"
+                value={formik.values.favoriteColor}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+            >
+                {COLORS.map((color) => <option key={color.value} value={color.value}>{color.name}</option>)}
+            </select>
 
+            {/* Sauces */}
+            <label htmlFor="sauces">Sauces</label>
             <div>
-                <label htmlFor="sauces">Sauces</label>
                 {SAUCES.map((sauce) => (
-                    <div key={sauce.value}>
+                    <div className={styles.my_05} key={sauce.value}>
                         <label>
                             <input
                             type="checkbox"
@@ -167,43 +166,46 @@ export default function UserForm() {
                 ))}
             </div>
 
+            {/* Stooge */}
+            <label htmlFor="stooge">Best Stooge</label>
             <div>
                 {STOOGE.map((stooge) => (
-                    <label key={stooge.value}>
-                        <input
-                            type="radio"
-                            name="stooge"
-                            value={stooge.value}
-                            checked={formik.values.stooge === stooge.value}
-                            onChange={formik.handleChange}
-                        />
-                        {stooge.name}
-                    </label>
+                    <div className={styles.my_05} key={stooge.value}>
+                        <label>
+                            <input
+                                type="radio"
+                                name="stooge"
+                                value={stooge.value}
+                                checked={formik.values.stooge === stooge.value}
+                                onChange={formik.handleChange}
+                            />
+                            {stooge.name}
+                        </label>
+                    </div>
                 ))}
             </div>
 
-            <div>
-                <label htmlFor="notes">Notes</label>
-                <textarea
-                    id="notes"
-                    name="notes"
-                    placeholder="Notes"
-                    value={formik.values.notes}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
+            {/* Notes */}
+            <label htmlFor="notes">Notes</label>
+            <textarea
+                id="notes"
+                name="notes"
+                placeholder="Note"
+                value={formik.values.notes}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+            />
+            
+            <div className={styles.buttons_container}>
+                { formik.values === formik.initialValues ? (<button className={styles.submit_inactive} disabled>Submit</button>) : (<button className={styles.submit_active} type="submit">Submit</button>) }
+                { formik.values === formik.initialValues ? (<button className={styles.reset_inactive} type="button" disabled>Reset</button>) : (<button className={styles.reset_active} type="button" onClick={formik.handleReset}>Reset</button>) }
             </div>
 
-            { formik.values === formik.initialValues ? (<button disabled>Submit</button>) : (<button type="submit">Submit</button>) }
-            { formik.values === formik.initialValues ? (<button type="button" disabled>Reset</button>) : (<button type="button" onClick={formik.handleReset}>Reset</button>) }
-
-            <div>
-                <textarea rows={10} cols={50} readOnly value={
-                    formik.values === formik.initialValues ?
-                    JSON.stringify(defaultTextAreaValue, null, 2) :
-                    JSON.stringify(formik.values, null, 2)
-                }  />
-            </div>
+            <textarea className={styles.displayJSON_textArea} rows={10} cols={50} readOnly value={
+                formik.values === formik.initialValues ?
+                JSON.stringify(defaultTextAreaValue, null, 2) :
+                JSON.stringify(formik.values, null, 2)
+            }  />
         </form>
     );
 }

@@ -1,0 +1,67 @@
+.form {
+    border: 1px inset rgb(194, 194, 194);
+    box-shadow: 2px 2px rgb(194, 194, 194);
+    border-radius: 3px;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 8rem auto;
+    grid-template-rows: repeat(9, auto);
+    gap: 1rem 0;
+}
+
+.my_05 {
+    margin: 0.5rem 0;
+}
+
+.buttons_container {
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.submit_active {
+    width: 5rem;
+    background-color: rgb(40, 112, 221);
+    border-color: darkblue;
+    border-width: 1px;
+    border-radius: 5px;
+    color: white;
+}
+
+.submit_inactive {
+    width: 5rem;
+    background-color: rgb(40, 112, 221);
+    border-color: darkblue;
+    border-width: 1px;
+    border-radius: 5px;
+    color: white;
+    opacity: 0.4;
+}
+
+.reset_active {
+    width: 5rem;
+    background-color: rgb(211, 208, 208);
+    border-color: gray;
+    border-width: 1px;
+    border-radius: 5px;
+    color: black;
+}
+
+.reset_inactive {
+    width: 5rem;
+    background-color: rgb(211, 208, 208);
+    border-color: gray;
+    border-width: 1px;
+    border-radius: 5px;
+    color: black;
+    opacity: 0.4;
+}
+
+.displayJSON_textArea {
+    grid-column: 1 / span 2;
+    width: auto;
+    background-color: rgb(211, 208, 208);
+    padding: 1rem;
+}
