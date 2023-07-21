@@ -86,8 +86,9 @@ export default function UserForm() {
         <form className={styles.form} onSubmit={formik.handleSubmit}>
             
             {/* First Name */}
-            <label htmlFor="firstName">First Name</label>
+            <label className={styles.firstName_label} htmlFor="firstName">First Name</label>
             <input
+                className={formik.touched.firstName && formik.errors.firstName ? styles.firstName_input_error : styles.firstName_input}
                 id="firstName"
                 name="firstName"
                 type="text"
@@ -96,12 +97,13 @@ export default function UserForm() {
                 value={formik.values.firstName}
                 onBlur={formik.handleBlur}
             />
-            {formik.touched.firstName && formik.errors.firstName && <div>{formik.errors.firstName}</div>}
+            {formik.touched.firstName && formik.errors.firstName && <div className={styles.firstName_error}>{formik.errors.firstName}</div>}
 
 
             {/* Last Name */}
-            <label htmlFor="lastName">Last Name</label>
+            <label className={styles.lastName_label} htmlFor="lastName">Last Name</label>
             <input
+                className={formik.touched.lastName && formik.errors.lastName ? styles.lastName_input_error : styles.lastName_input}
                 id="lastName"
                 name="lastName"
                 type="text"
@@ -110,11 +112,12 @@ export default function UserForm() {
                 value={formik.values.lastName}
                 onBlur={formik.handleBlur}
             />
-            {formik.touched.lastName && formik.errors.lastName && <div>{formik.errors.lastName}</div>}
+            {formik.touched.lastName && formik.errors.lastName && <div className={styles.lastName_error}>{formik.errors.lastName}</div>}
 
             {/* Age */}
-            <label htmlFor="age">Age</label>
+            <label className={styles.age_label} htmlFor="age">Age</label>
             <input
+                className={formik.touched.age && formik.errors.age ? styles.age_input_error : styles.age_input}
                 id="age"
                 name="age"
                 type="number"
@@ -124,11 +127,12 @@ export default function UserForm() {
                 onChange={formik.handleChange}
                 value={formik.values.age}
             />
-            {formik.touched.age && formik.errors.age && <div>{formik.errors.age}</div>}
+            {formik.touched.age && formik.errors.age && <div className={styles.age_error}>{formik.errors.age}</div>}
 
             {/* Employed */}
-            <label htmlFor="employed">Employed</label>
+            <label className={styles.employed_label} htmlFor="employed">Employed</label>
             <input
+                className={styles.employed_input}
                 id="employed"
                 name="employed"
                 type="checkbox"
@@ -137,8 +141,9 @@ export default function UserForm() {
             />
 
             {/* Favorite Color */}
-            <label htmlFor="favoriteColor">Favorite Color</label>
+            <label className={styles.favoriteColor_label} htmlFor="favoriteColor">Favorite Color</label>
             <select
+                className={styles.favoriteColor_select}
                 id="favoriteColor"
                 name="favoriteColor"
                 value={formik.values.favoriteColor}
@@ -149,8 +154,8 @@ export default function UserForm() {
             </select>
 
             {/* Sauces */}
-            <label htmlFor="sauces">Sauces</label>
-            <div>
+            <label className={styles.sauces_label} htmlFor="sauces">Sauces</label>
+            <div className={styles.sauces_container}>
                 {SAUCES.map((sauce) => (
                     <div className={styles.my_05} key={sauce.value}>
                         <label>
@@ -168,8 +173,8 @@ export default function UserForm() {
             </div>
 
             {/* Stooge */}
-            <label htmlFor="stooge">Best Stooge</label>
-            <div>
+            <label className={styles.stooge_label} htmlFor="stooge">Best Stooge</label>
+            <div className={styles.stooge_container}>
                 {STOOGE.map((stooge) => (
                     <div className={styles.my_05} key={stooge.value}>
                         <label>
@@ -187,8 +192,9 @@ export default function UserForm() {
             </div>
 
             {/* Notes */}
-            <label htmlFor="notes">Notes</label>
+            <label className={styles.notes_label} htmlFor="notes">Notes</label>
             <textarea
+                className={formik.touched.notes && formik.errors.notes ? styles.notes_textArea_error : styles.notes_textArea}
                 id="notes"
                 name="notes"
                 placeholder="Note"
@@ -196,14 +202,14 @@ export default function UserForm() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
             />
-            {formik.touched.notes && formik.errors.notes && <div>{formik.errors.notes}</div>}
+            {formik.touched.notes && formik.errors.notes && <div className={styles.notes_error}>{formik.errors.notes}</div>}
             
             <div className={styles.buttons_container}>
                 { formik.values === formik.initialValues ? (<button className={styles.submit_inactive} disabled>Submit</button>) : (<button className={styles.submit_active} type="submit">Submit</button>) }
                 { formik.values === formik.initialValues ? (<button className={styles.reset_inactive} type="button" disabled>Reset</button>) : (<button className={styles.reset_active} type="button" onClick={formik.handleReset}>Reset</button>) }
             </div>
 
-            <textarea className={styles.displayJSON_textArea} rows={10} cols={50} readOnly value={
+            <textarea className={styles.displayJSON_textArea} rows={15} cols={1} readOnly value={
                 formik.values === formik.initialValues ?
                 JSON.stringify(defaultTextAreaValue, null, 2) :
                 JSON.stringify(formik.values, null, 2)

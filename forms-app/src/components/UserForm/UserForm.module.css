@@ -5,16 +5,145 @@
     padding: 1.5rem;
     display: grid;
     grid-template-columns: 8rem auto;
-    grid-template-rows: repeat(9, auto);
+    grid-template-rows: repeat(13, auto);
     gap: 1rem 0;
 }
 
-.my_05 {
-    margin: 0.5rem 0;
+.firstName_label {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.firstName_input {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.firstName_input_error {
+    grid-column: 2;
+    grid-row: 1;
+    border-color: red;
+}
+
+.firstName_error {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    color: red;
+    text-align: center;
+}
+
+.lastName_label {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.lastName_input {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.lastName_input_error {
+    grid-column: 2;
+    grid-row: 3;
+    border-color: red;
+}
+
+.lastName_error {
+    grid-column: 1 / span 2;
+    grid-row: 4;
+    color: red;
+    text-align: center;
+}
+
+.age_label {
+    grid-column: 1;
+    grid-row: 5;
+}
+
+.age_input {
+    grid-column: 2;
+    grid-row: 5;
+}
+
+.age_input_error {
+    grid-column: 2;
+    grid-row: 5;
+    border-color: red;
+}
+
+.age_error {
+    grid-column: 1 / span 2;
+    grid-row: 6;
+    color: red;
+    text-align: center;
+}
+
+.employed_label {
+    grid-column: 1;
+    grid-row: 7;
+}
+
+.employed_input {
+    grid-column: 2;
+    grid-row: 7;
+}
+
+.favoriteColor_label {
+    grid-column: 1;
+    grid-row: 8;
+}
+
+.favoriteColor_select {
+    grid-column: 2;
+    grid-row: 8;
+}
+
+.sauces_label {
+    grid-column: 1;
+    grid-row: 9;
+}
+
+.sauces_container {
+    grid-column: 2;
+    grid-row: 9;
+}
+
+.stooge_label {
+    grid-column: 1;
+    grid-row: 10;
+}
+
+.stooge_container {
+    grid-column: 2;
+    grid-row: 10;
+}
+
+.notes_label {
+    grid-column: 1;
+    grid-row: 11;
+}
+
+.notes_textArea {
+    grid-column: 2;
+    grid-row: 11;
+}
+
+.notes_textArea_error {
+    grid-column: 2;
+    grid-row: 11;
+    border-color: red;
+}
+
+.notes_error {
+    grid-column: 1 / span 2;
+    grid-row: 12;
+    color: red;
+    text-align: center;
 }
 
 .buttons_container {
     grid-column: 1 / span 2;
+    grid-row: 13;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,7 +190,12 @@
 
 .displayJSON_textArea {
     grid-column: 1 / span 2;
+    grid-row: 14;
     width: auto;
     background-color: rgb(211, 208, 208);
     padding: 1rem;
+}
+
+.my_05 {
+    margin: 0.5rem 0;
 }
