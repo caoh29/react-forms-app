@@ -98,6 +98,7 @@ export default function UserForm() {
             />
             {formik.touched.firstName && formik.errors.firstName && <div>{formik.errors.firstName}</div>}
 
+
             {/* Last Name */}
             <label htmlFor="lastName">Last Name</label>
             <input
@@ -195,6 +196,7 @@ export default function UserForm() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
             />
+            {formik.touched.notes && formik.errors.notes && <div>{formik.errors.notes}</div>}
             
             <div className={styles.buttons_container}>
                 { formik.values === formik.initialValues ? (<button className={styles.submit_inactive} disabled>Submit</button>) : (<button className={styles.submit_active} type="submit">Submit</button>) }
